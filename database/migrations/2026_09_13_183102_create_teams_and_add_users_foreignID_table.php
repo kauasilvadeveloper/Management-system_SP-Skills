@@ -18,9 +18,9 @@ return new class extends Migration {
 
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('team_id')
-                ->nullable()
+                ->after('id')
                 ->constrained('teams')
-                ->nullOnDelete();
+                ->cascadeOnDelete();
         });
     }
 
@@ -29,11 +29,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
-
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['team_id']);
             $table->dropColumn('team_id');
         });
+
+        Schema::dropIfExists('teams');
     }
 };
