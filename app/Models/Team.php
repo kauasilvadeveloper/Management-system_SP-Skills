@@ -12,7 +12,7 @@ class Team extends Model
     /** @use HasFactory<\Database\Factories\TeamFactory> */
     use HasFactory;
 
-    protected $fillable = "name";
+    protected $fillable = ["name"];
 
     public function users() : HasMany
     {
